@@ -21,20 +21,20 @@ const API_URL = `https://right-up.vercel.app/api`;
 export default function App() {
   const [dishStyle, setDishStyle] = useState(initialState);
   const [ingredients, setIngredients] = useState(initialState);
-  const [complexity, setComplexity] = useState(initialState)
+  const [complexity, setComplexity] = useState(initialState);
   const [restrictions, setRestrictions] = useState(initialState);
 
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState();
 
-const initialState = "";
+  const initialState = "";
 
-const resetState = () => {
-  setDishStyle(initialState);
-  setComplexity(initialState);
-  setIngredients(initialState);
-  setRestrictions(initialState)
-}
+  const resetState = () => {
+    setDishStyle(initialState);
+    setComplexity(initialState);
+    setIngredients(initialState);
+    setRestrictions(initialState);
+  };
 
   const handleValueChangeComplexity = (itemValue) => setComplexity(itemValue);
   const handleValueChangeRestrictions = (itemValue) =>
@@ -72,17 +72,9 @@ const resetState = () => {
     return (
       <SafeAreaView>
         <View style={styles.loadingContainer}>
-          <Text
-            style={{
-              justifyContent: "space-evenly",
-              fontSize: 30,
-              alignItems: "center",
-              color: "##353740",
-            }}
-          >
-            {" "}
+          <Text style={styles.subtitle}>
             Your leftover recipe is coming{" "}
-            <Text style={{ color: "#4f2f4f" }}>Right-Up</Text>
+            <Text style={styles.subtitleFlair}>Right-Up</Text>
           </Text>
           <Image
             source={loadingGif}
@@ -105,12 +97,17 @@ const resetState = () => {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView>
-          <Text style={styles.returnTitle}>Enjoy your recipe!</Text>
+          <Text style={styles.returnTitle}>
+            Enjoy your <Text style={styles.title}>recipe</Text>!
+          </Text>
           <Text style={styles.returnresults}>{result}</Text>
-          <Pressable onPress={() => {onTryAgain(); resetState()}}
-         
-          
-          style={styles.button}>
+          <Pressable
+            onPress={() => {
+              onTryAgain();
+              resetState();
+            }}
+            style={styles.button}
+          >
             <Text style={styles.buttonText}>Generate Another Recipe</Text>
           </Pressable>
         </ScrollView>
@@ -120,101 +117,80 @@ const resetState = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.titlecontainer}>
-        <Text style={styles.title}>Right-Up</Text>
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.label}>Dish Style</Text>
-        <TextInput
-          type="text"
-          placeholder="e.g. Classic, Greek, Mexican, Korean..."
-          keyboardType="default"
-          style={styles.input}
-          value={dishStyle}
-          onChangeText={setDishStyle}
-        />
+      <ScrollView>
+        <View style={styles.titlecontainer}>
+          <Text style={styles.title}>Right-Up</Text>
+          <Text style={styles.subtitle}>
+            Turn your leftovers into something{" "}
+            <Text style={styles.subtitleFlair}>delicious</Text>
+          </Text>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.label}>Dish Style</Text>
+          <TextInput
+            type="text"
+            placeholder="e.g. Classic, Greek, Mexican, Korean..."
+            keyboardType="default"
+            style={styles.input}
+            value={dishStyle}
+            onChangeText={setDishStyle}
+          />
 
-        {/* <Text style={styles.label}>Who is this gift for?</Text>
-        <View style={styles.selectorContainer}>
-          <Text
-            onPress={() => setDishStyle("Classic")}
-            style={[
-              styles.selector,
-              dishStyle === "no" && { backgroundColor: "#10a37f" },
-            ]}
-          >
-            Male
-          </Text>
-          <Text
-            onPress={() => setDishStyle("no")}
-            style={[
-              styles.selector,
-              dishStyle === "no" && (
-                <TextInput
-                  type="text"
-                  placeholder="e.g. Classic, Greek, Mexican"
-                  keyboardType="default"
-                  style={styles.input}
-                  value={dishStyle}
-                  onChangeText={setDishStyle}
+          <Text style={styles.label}>Complexity</Text>
+          <View>
+            <View styles={styles.pickerContainer}>
+              <Picker
+                style={styles.pickerStyles}
+                selectedValue={complexity}
+                onValueChange={handleValueChangeComplexity}
+              >
+                <Picker.Item label="Basic" value="basic" />
+                <Picker.Item label="Simple" value="simple" />
+                <Picker.Item label="Average" value="average" />
+                <Picker.Item label="Complex" value="complex" />
+                <Picker.Item label="Hard" value="hard" />
+                <Picker.Item label="Master Chef" value="master level" />
+                <Picker.Item
+                  label="Michelin Star"
+                  value="michelin star level"
                 />
-              ),
-            ]}
-          >
-            Female
-          </Text>
-        </View> */}
-        <Text style={styles.label}>Complexity</Text>
-        <View>
+              </Picker>
+            </View>
+          </View>
+
+          <Text style={styles.label}>Restrictions</Text>
           <View styles={styles.pickerContainer}>
             <Picker
               style={styles.pickerStyles}
-              selectedValue={complexity}
-              onValueChange={handleValueChangeComplexity}
+              selectedValue={restrictions}
+              onValueChange={handleValueChangeRestrictions}
             >
-              <Picker.Item label="Basic" value="basic" />
-              <Picker.Item label="Simple" value="simple" />
-              <Picker.Item label="Average" value="average" />
-              <Picker.Item label="Complex" value="complex" />
-              <Picker.Item label="Hard" value="hard" />
-              <Picker.Item label="Master Chef" value="master level" />
-              <Picker.Item label="Michelin Star" value="michelin star level" />
+              <Picker.Item label="None" value="with no restriction" />
+              <Picker.Item label="No Stove" value="without a stove" />
+              <Picker.Item label="No Oven" value="without a oven" />
+              <Picker.Item
+                label="No Stovetop and Oven"
+                value="no stovetop and oven"
+              />
             </Picker>
           </View>
+
+          <Text style={styles.label}>Ingredients</Text>
+          <TextInput
+            type="text"
+            placeholder="e.g. 2 steaks, leftover meatloaf, 3 slices of bacon"
+            keyboardType="default"
+            style={styles.input}
+            value={ingredients}
+            onChangeText={setIngredients}
+          />
+          <Pressable style={styles.button} onPress={onSubmit}>
+            <Text style={styles.buttonText}>Generate New Recipe</Text>
+          </Pressable>
+
+          <StatusBar style="auto" />
         </View>
-
-        <Text style={styles.label}>Restrictions</Text>
-        <View styles={styles.pickerContainer}>
-          <Picker
-            style={styles.pickerStyles}
-            selectedValue={restrictions}
-            onValueChange={handleValueChangeRestrictions}
-          >
-            <Picker.Item label="None" value="with no restriction" />
-            <Picker.Item label="No Stove" value="without a stove" />
-            <Picker.Item label="No Oven" value="without a oven" />
-            <Picker.Item
-              label="No Stovetop and Oven"
-              value="no stovetop and oven"
-            />
-          </Picker>
-        </View>
-
-        <Text style={styles.label}>Ingredients</Text>
-        <TextInput
-          type="text"
-          placeholder="e.g. 2 steaks, leftover meatloaf, 3 slices of bacon"
-          keyboardType="default"
-          style={styles.input}
-          value={ingredients}
-          onChangeText={setIngredients}
-        />
-        <Pressable style={styles.button} onPress={onSubmit}>
-          <Text style={styles.buttonText}>Generate New Recipe</Text>
-        </Pressable>
-
-        <StatusBar style="auto" />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -233,7 +209,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    fontSize: 16,
+    fontSize: 23,
     borderColor: "#353740",
     borderWidth: 1,
     padding: 16,
@@ -242,8 +218,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   label: {
-    fontSize: 16,
     color: "gray",
+    fontSize: 23,
   },
   title: {
     fontSize: 40,
@@ -258,7 +234,16 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 20,
     paddingTop: 10,
+
     marginTop: 10,
+    color: "#353740",
+    textAlign: "center",
+  },
+  subtitleFlair: {
+    fontSize: 20,
+    paddingTop: 10,
+    marginTop: 10,
+    fontWeight: "bold",
     color: "#4f2f4f",
     textAlign: "center",
   },
@@ -295,8 +280,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderColor: "#4f2f4f",
     borderWidth: 1,
-    padding: 16,
     borderRadius: 4,
+    marginVertical: 10,
   },
   returnresults: {
     fontWeight: "bold",
@@ -313,6 +298,6 @@ const styles = StyleSheet.create({
     paddingTop: 50,
 
     marginVertical: 10,
-    color: "#4f2f4f",
+    color: "#353740",
   },
 });
