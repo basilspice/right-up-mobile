@@ -78,7 +78,8 @@ export default function App() {
       <SafeAreaView>
         <View style={styles.loadingContainer}>
           <Text style={styles.subtitle}>
-            Your recipe is coming{" "}
+            Your recipe is coming
+            {" "}
             <Text style={styles.subtitleFlair}>
              
               Right-Up

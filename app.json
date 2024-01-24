@@ -16,10 +16,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.right-up.basilspice",
-      "buildNumber": "2"
+      "bundleIdentifier": "com.right-up.basilspice"
     },
     "android": {
+      "package": "com.basilspice.rightup",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
@@ -32,6 +32,12 @@
       "eas": {
         "projectId": "84c168f5-8d27-4eb6-aa4b-c6d28f64bf4b"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/84c168f5-8d27-4eb6-aa4b-c6d28f64bf4b"
     }
   }
 }
