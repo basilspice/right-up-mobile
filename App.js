@@ -42,6 +42,7 @@ export default function App() {
   const onSubmit = async () => {
     if (loading) {
       return;
+      
     }
     setLoading(true);
 
@@ -62,19 +63,20 @@ export default function App() {
       const data = await response.json();
       setResult(data.result);
     } catch (e) {
-      Alert.alert("Failed to generate gift ideas. Try later");
+      Alert.alert("Failed to generate recipe. Try later");
     } finally {
       setLoading(false);
     }
   };
+  
 
   if (loading) {
     return (
       <SafeAreaView>
         <View style={styles.loadingContainer}>
           <Text style={styles.subtitle}>
-            Your leftover recipe is coming{" "}
-            <Text style={styles.subtitleFlair}>Right-Up</Text>
+            Your leftover recipe is coming{"    "}
+            <Text style={styles.subtitleFlair}><br />Right-Up</Text>
           </Text>
           <Image
             source={loadingGif}
@@ -134,6 +136,7 @@ export default function App() {
             style={styles.input}
             value={dishStyle}
             onChangeText={setDishStyle}
+            required={true}
           />
 
           <Text style={styles.label}>Complexity</Text>
@@ -185,7 +188,7 @@ export default function App() {
             onChangeText={setIngredients}
           />
           <Pressable style={styles.button} onPress={onSubmit}>
-            <Text style={styles.buttonText}>Generate New Recipe</Text>
+            <Text style={styles.buttonText}>Create A Recipe</Text>
           </Pressable>
 
           <StatusBar style="auto" />
