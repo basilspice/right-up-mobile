@@ -36,6 +36,7 @@ export default function App() {
     setComplexity(initialState);
     setIngredients(initialState);
     setRestrictions(initialState);
+    setAllergies(initialState)
   };
 
   const handleValueChangeComplexity = (itemValue) => setComplexity(itemValue);
@@ -168,11 +169,11 @@ export default function App() {
           <Text style={styles.label}>Restrictions</Text>
           <TextInput
             type="text"
-            placeholder="e.g. No Stove, No Oven..."
+            placeholder="e.g. None, No Stove, No Oven..."
             keyboardType="default"
             style={styles.input}
-            value={allergies}
-            onChangeText={setAllergies}
+            value={restrictions}
+            onChangeText={setRestrictions}
             required={true}
           />
           <Text style={styles.label}>Allergies</Text>
