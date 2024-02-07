@@ -20,15 +20,12 @@ import loadingGif from "./assets/loading.gif";
 
 const API_URL = `https://right-up.vercel.app/api`;
 
-
-
-
 export default function App() {
   const [dishStyle, setDishStyle] = useState(initialState);
   const [ingredients, setIngredients] = useState(initialState);
   const [complexity, setComplexity] = useState(initialState);
   const [restrictions, setRestrictions] = useState(initialState);
-
+  const [allergies, setAllergies] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState();
 
@@ -61,6 +58,7 @@ export default function App() {
           ingredients,
           complexity,
           restrictions,
+          allergies,
         }),
       });
 
@@ -78,12 +76,9 @@ export default function App() {
       <SafeAreaView>
         <View style={styles.loadingContainer}>
           <Text style={styles.subtitle}>
-            Your recipe is coming
-            {" "}
-            <Text style={styles.subtitleFlair}>
-             
-              Right-Up
-            </Text><Text>!</Text>
+            Your recipe is coming{" "}
+            <Text style={styles.subtitleFlair}>Right-Up</Text>
+            <Text>!</Text>
           </Text>
           <Image
             source={loadingGif}
@@ -94,6 +89,7 @@ export default function App() {
             resizeMode="contain"
           />
         </View>
+        <Text> </Text>
       </SafeAreaView>
     );
   }
@@ -127,12 +123,12 @@ export default function App() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAwareScrollView>
-
         <View style={styles.titlecontainer}>
           <Text style={styles.title}>Right-Up</Text>
           <Text style={styles.subtitle}>
-            Turn your leftovers into something{" "}
-            <Text style={styles.subtitleFlair}>delicious</Text><Text>!</Text>
+            Turn some things into something{" "}
+            <Text style={styles.subtitleFlair}>delicious</Text>
+            <Text>!</Text>
           </Text>
         </View>
         <View style={styles.container}>
@@ -145,7 +141,7 @@ export default function App() {
             value={dishStyle}
             onChangeText={setDishStyle}
             required={true}
-            />
+          />
 
           <Text style={styles.label}>Complexity</Text>
           <View>
@@ -154,56 +150,58 @@ export default function App() {
                 style={styles.pickerStyles}
                 selectedValue={complexity}
                 onValueChange={handleValueChangeComplexity}
-                >
+              >
                 <Picker.Item label="Basic" value="basic" />
                 <Picker.Item label="Simple" value="simple" />
                 <Picker.Item label="Average" value="average" />
                 <Picker.Item label="Complex" value="complex" />
-                <Picker.Item label="Hard" value="hard" />
-                <Picker.Item label="Master Chef" value="master level" />
+                {/* <Picker.Item label="Hard" value="hard" /> */}
+                {/* <Picker.Item label="Master Chef" value="master level" /> */}
                 <Picker.Item
                   label="Michelin Star"
                   value="michelin star level"
-                  />
+                />
               </Picker>
             </View>
           </View>
 
           <Text style={styles.label}>Restrictions</Text>
-          <View styles={styles.pickerContainer}>
-            <Picker
-              style={styles.pickerStyles}
-              selectedValue={restrictions}
-              onValueChange={handleValueChangeRestrictions}
-              >
-              <Picker.Item label="None" value="with no restriction" />
-              <Picker.Item label="No Stove" value="without a stove" />
-              <Picker.Item label="No Oven" value="without a oven" />
-              <Picker.Item
-                label="No Stovetop and Oven"
-                value="no stovetop and oven"
-                />
-            </Picker>
-          </View>
-       
-            <Text style={styles.label}>Ingredients</Text>
-            <TextInput
-              type="text"
-              placeholder="e.g. 2 steaks, leftover meatloaf, 3 slices of bacon"
-              keyboardType="default"
-              style={styles.input}
-              value={ingredients}
-              onChangeText={setIngredients}
-              />
-            <Pressable style={styles.button} onPress={onSubmit}>
-              <Text style={styles.buttonText}>Create A Recipe</Text>
-            </Pressable>
-          
+          <TextInput
+            type="text"
+            placeholder="e.g. No Stove, No Oven..."
+            keyboardType="default"
+            style={styles.input}
+            value={allergies}
+            onChangeText={setAllergies}
+            required={true}
+          />
+          <Text style={styles.label}>Allergies</Text>
+          <TextInput
+            type="text"
+            placeholder="e.g. Nothing, Tree Nuts, Shellfish..."
+            keyboardType="default"
+            style={styles.input}
+            value={allergies}
+            onChangeText={setAllergies}
+            required={true}
+          />
+          <Text style={styles.label}>Ingredients</Text>
+          <TextInput
+            type="text"
+            placeholder="e.g. 2 steaks, leftover meatloaf, 3 slices of bacon"
+            keyboardType="default"
+            style={styles.input}
+            value={ingredients}
+            onChangeText={setIngredients}
+            required={true}
+          />
+          <Pressable style={styles.button} onPress={onSubmit}>
+            <Text style={styles.buttonText}>Create A Recipe</Text>
+          </Pressable>
 
           <StatusBar style="auto" />
         </View>
-</KeyboardAwareScrollView>
-      
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 }
