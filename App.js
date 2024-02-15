@@ -17,7 +17,7 @@ import { Picker } from "@react-native-picker/picker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import loadingGif from "./assets/loading.gif";
-
+import logo from "./assets/iconcropped.png";
 const API_URL = `https://right-up.vercel.app/api`;
 
 export default function App() {
@@ -36,7 +36,7 @@ export default function App() {
     setComplexity(initialState);
     setIngredients(initialState);
     setRestrictions(initialState);
-    setAllergies(initialState)
+    setAllergies(initialState);
   };
 
   const handleValueChangeComplexity = (itemValue) => setComplexity(itemValue);
@@ -125,13 +125,15 @@ export default function App() {
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAwareScrollView>
         <View style={styles.titlecontainer}>
-          <Text style={styles.title}>Right-Up</Text>
+          {/* <Text style={styles.title}>Right-Up</Text> */}
+          <Image style={styles.image} source={logo} />
           <Text style={styles.subtitle}>
             Turn some things into something{" "}
             <Text style={styles.subtitleFlair}>delicious</Text>
             <Text>!</Text>
           </Text>
         </View>
+
         <View style={styles.container}>
           <Text style={styles.label}>Dish Style</Text>
           <TextInput
@@ -145,6 +147,17 @@ export default function App() {
           />
 
           <Text style={styles.label}>Complexity</Text>
+          <TextInput
+            type="text"
+            placeholder="e.g. Michelin Star, Simple, Advanced..."
+            keyboardType="default"
+            style={styles.input}
+            value={complexity}
+            onChangeText={setComplexity}
+            required={true}
+          />
+
+          {/* <Text style={styles.label}>Complexity</Text>
           <View>
             <View styles={styles.pickerContainer}>
               <Picker
@@ -156,30 +169,19 @@ export default function App() {
                 <Picker.Item label="Simple" value="simple" />
                 <Picker.Item label="Average" value="average" />
                 <Picker.Item label="Complex" value="complex" />
-                {/* <Picker.Item label="Hard" value="hard" /> */}
-                {/* <Picker.Item label="Master Chef" value="master level" /> */}
+                
                 <Picker.Item
                   label="Michelin Star"
                   value="michelin star level"
                 />
               </Picker>
             </View>
-          </View>
+          </View> */}
 
-          <Text style={styles.label}>Restrictions</Text>
-          <TextInput
-            type="text"
-            placeholder="e.g. None, No Stove, No Oven..."
-            keyboardType="default"
-            style={styles.input}
-            value={restrictions}
-            onChangeText={setRestrictions}
-            required={true}
-          />
           <Text style={styles.label}>Allergies</Text>
           <TextInput
             type="text"
-            placeholder="e.g. Nothing, Tree Nuts, Shellfish..."
+            placeholder="e.g. Nothing, Tree Nuts, Shellfish, Dairy..."
             keyboardType="default"
             style={styles.input}
             value={allergies}
@@ -189,7 +191,7 @@ export default function App() {
           <Text style={styles.label}>Ingredients</Text>
           <TextInput
             type="text"
-            placeholder="e.g. 2 steaks, leftover meatloaf, 3 slices of bacon"
+            placeholder="e.g. Panang Curry, 3 Slices of Bacon, 2 Duck Eggs"
             keyboardType="default"
             style={styles.input}
             value={ingredients}
@@ -217,6 +219,7 @@ const styles = StyleSheet.create({
   titlecontainer: {
     backgroundColor: "#fff",
     justifyContent: "center",
+    alignItems: "center",
     margin: 10,
   },
 
@@ -233,15 +236,16 @@ const styles = StyleSheet.create({
     color: "gray",
     fontSize: 23,
   },
-  title: {
-    fontSize: 40,
+  image: {
+    justifyContent: "center",
     alignContent: "center",
-    fontWeight: "bold",
-    textAlign: "center",
     paddingTop: 10,
     paddingBottom: 15,
     marginVertical: 10,
-    color: "#4f2f4f",
+  },
+  title: {
+    justifyContent: "center",
+    alignContent: "center",
   },
   subtitle: {
     fontSize: 20,
