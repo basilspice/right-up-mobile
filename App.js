@@ -114,14 +114,20 @@ export default function App() {
           </Text>
           <Pressable
             onPress={() => {
+              onSubmit();
+            }}
+            className="bg-[#4f2f4f] p-5 rounded-xl items-center mt-5"
+          >
+            <Text className="text-[#fff] font-bold">Try Different Recipe</Text>
+          </Pressable>
+          <Pressable
+            onPress={() => {
               onTryAgain();
               resetState();
             }}
-            className="bg-[#4f2f4f] p-5 rounded-lg items-center my-5"
+            className="bg-[#4f2f4f] p-5 rounded-xl items-center my-5"
           >
-            <Text className="text-[#fff] font-bold">
-              Generate Another Recipe
-            </Text>
+            <Text className="text-[#fff] font-bold">Create New Recipe</Text>
           </Pressable>
         </ScrollView>
       </SafeAreaView>
@@ -137,7 +143,7 @@ export default function App() {
             //style={styles.image}
             source={logo}
           />
-          <Text className="text-lg pt-8">
+          <Text className="text-lg pt-8 text-center">
             Turn some things into something{" "}
             <Text className="text-lg text-[#4f2f4f] pt-8 mt-8 font-bold">
               delicious
@@ -146,7 +152,7 @@ export default function App() {
           </Text>
         </View>
 
-        <View className="flex-1 bg-white justify-center m-2.5">
+        <View className="flex-1 bg-white justify-center m-2.5 text-center">
           <Text className="text-[gray] text-xl">Dish Style</Text>
           <TextInput
             type="text"
@@ -161,7 +167,7 @@ export default function App() {
           <Text className="text-[gray] text-xl">Complexity</Text>
           <TextInput
             type="text"
-            placeholder="e.g. Michelin Star, Simple, Advanced..."
+            placeholder="Michelin Star, Simple, Advanced..."
             keyboardType="default"
             className="text-2xl border-slate-500 border p-4 mt-1.5 mb-3 rounded-md"
             value={complexity}
@@ -172,7 +178,7 @@ export default function App() {
           <Text className="text-xl ">Allergies</Text>
           <TextInput
             type="text"
-            placeholder="e.g. Nothing, Tree Nuts, Shellfish, Dairy..."
+            placeholder="Nothing, Tree Nuts, Shellfish, Dairy..."
             keyboardType="default"
             className="text-2xl border-slate-500 border p-4 mt-1.5 mb-3 rounded-md"
             value={allergies}
@@ -182,7 +188,7 @@ export default function App() {
           <Text className="text-[gray] text-xl">Ingredients</Text>
           <TextInput
             type="text"
-            placeholder="e.g. Panang Curry, 3 Slices of Bacon, 2 Duck Eggs"
+            placeholder="Panang Curry, 3 Slices of Bacon, 2 Duck Eggs"
             keyboardType="default"
             className="text-2xl border-slate-500 border p-4 mt-1.5 mb-3 rounded-md"
             value={ingredients}
@@ -190,7 +196,7 @@ export default function App() {
             required={true}
           />
           <Pressable
-            className="bg-[#4f2f4f] p-4 rounded items-center my-5"
+            className="bg-[#4f2f4f] p-4 rounded-xl items-center my-5"
             onPress={onSubmit}
           >
             <Text className="text-white font-bold">Create A Recipe</Text>
