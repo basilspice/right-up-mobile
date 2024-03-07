@@ -3,7 +3,6 @@ import { StatusBar } from "expo-status-bar";
 import {
   Pressable,
   SafeAreaView,
-  StyleSheet,
   Text,
   TextInput,
   View,
@@ -75,12 +74,7 @@ export default function App() {
   if (loading) {
     return (
       <SafeAreaView>
-        <View style={styles.loadingContainer}>
-          <Text style={styles.subtitle}>
-            Your recipe is coming{" "}
-            <Text style={styles.subtitleFlair}>Right-Up</Text>
-            <Text>!</Text>
-          </Text>
+        <View>
           <Image
             source={loadingGif}
             style={{
@@ -89,8 +83,16 @@ export default function App() {
             }}
             resizeMode="contain"
           />
+          <Text className="text-xl pt-2.5 mt-2.5 justify-center text-center">
+            Your recipe is coming{" "}
+            <Text className="text-xl pt-2.5 mt-2.5 font-bold text-center text-[#4f2f4f]">
+              Right-Up
+            </Text>
+            <Text className="text-xl text-[black] pt-2.5 mt-2.5 font-bold text-center">
+              !
+            </Text>
+          </Text>
         </View>
-        <Text> </Text>
       </SafeAreaView>
     );
   }
@@ -101,20 +103,25 @@ export default function App() {
 
   if (result) {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView className="flex-1 bg-white justify-center m-2.5">
         <ScrollView>
-          <Text style={styles.returnTitle}>
-            Enjoy your <Text style={styles.title}>recipe</Text>!
+          <Text className="text-xl font-bold content-center text-center pt-25 mt-2.5 mb-2.5">
+            Enjoy your{" "}
+            <Text className="justify-center content-center">recipe</Text>!
           </Text>
-          <Text style={styles.returnresults}>{result}</Text>
+          <Text className="font-bold mt-40px text-center text-[black] mb-20px">
+            {result}
+          </Text>
           <Pressable
             onPress={() => {
               onTryAgain();
               resetState();
             }}
-            style={styles.button}
+            className="bg-[#4f2f4f] p-5 rounded-lg items-center my-5"
           >
-            <Text style={styles.buttonText}>Generate Another Recipe</Text>
+            <Text className="text-[#fff] font-bold">
+              Generate Another Recipe
+            </Text>
           </Pressable>
         </ScrollView>
       </SafeAreaView>
@@ -122,84 +129,71 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView className="flex-1">
       <KeyboardAwareScrollView>
-        <View style={styles.titlecontainer}>
-          {/* <Text style={styles.title}>Right-Up</Text> */}
-          <Image style={styles.image} source={logo} />
-          <Text style={styles.subtitle}>
+        <View className="bg-white justify-center items-center m-10">
+          <Image
+            className="justify-center content-center pt-5 pb-5 my-5"
+            //style={styles.image}
+            source={logo}
+          />
+          <Text className="text-lg pt-8">
             Turn some things into something{" "}
-            <Text style={styles.subtitleFlair}>delicious</Text>
-            <Text>!</Text>
+            <Text className="text-lg text-[#4f2f4f] pt-8 mt-8 font-bold">
+              delicious
+            </Text>
+            <Text className="text-black">!</Text>
           </Text>
         </View>
 
-        <View style={styles.container}>
-          <Text style={styles.label}>Dish Style</Text>
+        <View className="flex-1 bg-white justify-center m-2.5">
+          <Text className="text-[gray] text-xl">Dish Style</Text>
           <TextInput
             type="text"
-            placeholder="e.g. Classic, Greek, Mexican, Korean..."
+            placeholder="Dessert, Korean Dinner, Greek, Italian..."
             keyboardType="default"
-            style={styles.input}
+            className="text-2xl border-slate-500 border p-4 mt-1.5 mb-3 rounded-md"
             value={dishStyle}
             onChangeText={setDishStyle}
             required={true}
           />
 
-          <Text style={styles.label}>Complexity</Text>
+          <Text className="text-[gray] text-xl">Complexity</Text>
           <TextInput
             type="text"
             placeholder="e.g. Michelin Star, Simple, Advanced..."
             keyboardType="default"
-            style={styles.input}
+            className="text-2xl border-slate-500 border p-4 mt-1.5 mb-3 rounded-md"
             value={complexity}
             onChangeText={setComplexity}
             required={true}
           />
 
-          {/* <Text style={styles.label}>Complexity</Text>
-          <View>
-            <View styles={styles.pickerContainer}>
-              <Picker
-                style={styles.pickerStyles}
-                selectedValue={complexity}
-                onValueChange={handleValueChangeComplexity}
-              >
-                <Picker.Item label="Basic" value="basic" />
-                <Picker.Item label="Simple" value="simple" />
-                <Picker.Item label="Average" value="average" />
-                <Picker.Item label="Complex" value="complex" />
-                
-                <Picker.Item
-                  label="Michelin Star"
-                  value="michelin star level"
-                />
-              </Picker>
-            </View>
-          </View> */}
-
-          <Text style={styles.label}>Allergies</Text>
+          <Text className="text-xl ">Allergies</Text>
           <TextInput
             type="text"
             placeholder="e.g. Nothing, Tree Nuts, Shellfish, Dairy..."
             keyboardType="default"
-            style={styles.input}
+            className="text-2xl border-slate-500 border p-4 mt-1.5 mb-3 rounded-md"
             value={allergies}
             onChangeText={setAllergies}
             required={true}
           />
-          <Text style={styles.label}>Ingredients</Text>
+          <Text className="text-[gray] text-xl">Ingredients</Text>
           <TextInput
             type="text"
             placeholder="e.g. Panang Curry, 3 Slices of Bacon, 2 Duck Eggs"
             keyboardType="default"
-            style={styles.input}
+            className="text-2xl border-slate-500 border p-4 mt-1.5 mb-3 rounded-md"
             value={ingredients}
             onChangeText={setIngredients}
             required={true}
           />
-          <Pressable style={styles.button} onPress={onSubmit}>
-            <Text style={styles.buttonText}>Create A Recipe</Text>
+          <Pressable
+            className="bg-[#4f2f4f] p-4 rounded items-center my-5"
+            onPress={onSubmit}
+          >
+            <Text className="text-white font-bold">Create A Recipe</Text>
           </Pressable>
 
           <StatusBar style="auto" />
@@ -208,112 +202,3 @@ export default function App() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    margin: 10,
-  },
-  titlecontainer: {
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 10,
-  },
-
-  input: {
-    fontSize: 23,
-    borderColor: "#353740",
-    borderWidth: 1,
-    padding: 16,
-    marginTop: 6,
-    marginBottom: 12,
-    borderRadius: 4,
-  },
-  label: {
-    color: "gray",
-    fontSize: 23,
-  },
-  image: {
-    justifyContent: "center",
-    alignContent: "center",
-    paddingTop: 10,
-    paddingBottom: 15,
-    marginVertical: 10,
-  },
-  title: {
-    justifyContent: "center",
-    alignContent: "center",
-  },
-  subtitle: {
-    fontSize: 20,
-    paddingTop: 10,
-
-    marginTop: 10,
-    color: "#353740",
-    textAlign: "center",
-  },
-  subtitleFlair: {
-    fontSize: 20,
-    paddingTop: 10,
-    marginTop: 10,
-    fontWeight: "bold",
-    color: "#4f2f4f",
-    textAlign: "center",
-  },
-  //selector
-  selectorContainer: {
-    flexDirection: "row",
-  },
-  selector: {
-    flex: 1,
-    textAlign: "center",
-    backgroundColor: "white",
-    margin: 5,
-    padding: 16,
-    borderRadius: 5,
-    overflow: "hidden",
-  },
-  button: {
-    backgroundColor: "#4f2f4f",
-    padding: 16,
-    borderRadius: 4,
-    alignItems: "center",
-    marginVertical: 20,
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
-  },
-  pickerContainer: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-  },
-  pickerStyles: {
-    fontSize: 16,
-    borderColor: "#4f2f4f",
-    borderWidth: 1,
-    borderRadius: 4,
-    marginVertical: 10,
-  },
-  returnresults: {
-    fontWeight: "bold",
-    marginTop: "40px",
-    textAlign: "center",
-    color: "black",
-    marginBottom: "20px",
-  },
-  returnTitle: {
-    fontSize: 40,
-    alignContent: "center",
-    fontWeight: "bold",
-    textAlign: "center",
-    paddingTop: 50,
-
-    marginVertical: 10,
-    color: "#353740",
-  },
-});
